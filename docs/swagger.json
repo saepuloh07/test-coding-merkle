@@ -1,0 +1,229 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+          "/api/guest/public/getAll": {
+            "get": {
+              "tags": ["Guests"],
+              "summary": "Get all guest in system",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/public/getOne/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of guest that we want to find",
+                "type": "string"
+              }
+            ],
+            "get": {
+              "summary": "Get guest with give ID",
+              "tags": ["Guests"],
+              "parameters": [],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/public/create": {
+            "post": {
+              "tags": ["Guests"],
+              "summary": "Create new guest in system",
+              "parameters": [
+                {
+                  "name": "guest",
+                  "in": "body",
+                  "description": "Guest that we want to create",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "New guest is created",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/admin/getAll": {
+            "get": {
+              "tags": ["Guests"],
+              "summary": "Get all guest in system",
+              "parameters": [
+                {
+                  "name": "x-auth-token",
+                  "in": "header",
+                  "required": true
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/admin/getOne/{id}": {
+            "parameters": [
+              {
+                "name": "x-auth-token",
+                "in": "header",
+                "required": true
+              },{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of guest that we want to find",
+                "type": "string"
+              }
+            ],
+            "get": {
+              "summary": "Get guest with give ID",
+              "tags": ["Guests"],
+              "parameters": [],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/admin/update/{id}": {
+            "parameters": [
+              {
+                "name": "x-auth-token",
+                "in": "header",
+                "required": true
+              },{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of guest that we want to find",
+                "type": "string"
+              }
+            ],
+            "put": {
+              "summary": "Update guest with give ID",
+              "tags": ["Guests"],
+              "parameters": [
+                {
+                  "name": "x-auth-token",
+                  "in": "header",
+                  "required": true
+                },{
+                  "name": "guest",
+                  "in": "body",
+                  "description": "Guest with new values of properties",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "User is updated",
+                  "schema": {
+                    "$ref": "#/definitions/model.Guest"
+                  }
+                }
+              }
+            }
+          },
+          "/api/guest/admin/delete/{id}": {
+            "parameters": [
+              {
+                "name": "x-auth-token",
+                "in": "header",
+                "required": true
+              },{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of guest that we want to find",
+                "type": "string"
+              }
+            ],
+            "delete": {
+                "summary": "Delete guest with given ID",
+                "tags": ["Guests"],
+                "responses": {
+                  "200": {
+                    "description": "Guest is deleted",
+                    "schema": {
+                      "$ref": "#/definitions/model.Guest"
+                    }
+                  }
+                }
+              }
+          }
+    },
+    "definitions": {
+        "response.JSONResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "data": {},
+                "error": {
+                    "type": "string"
+                },
+                "latency": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "result": {},
+                "status_code": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Guest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
